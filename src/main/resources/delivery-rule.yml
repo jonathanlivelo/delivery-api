@@ -1,0 +1,42 @@
+---
+name: "Rejected"
+description: "Rejected"
+priority: 0
+condition: "deliveryInfo.getWeight() > 50"
+actions:
+  - "deliveryInfo.setRejected(true);"
+---
+name: "HeavyParcel"
+description: "HeavyParcel"
+priority: 1
+condition: "deliveryInfo.getWeight() > 10 && deliveryInfo.getTotalCost()==0"
+actions:
+  - "deliveryInfo.setTotalCost(deliveryInfo.getWeight() * 20);"
+---
+name: "LargeParcel"
+description: "children are not allowed to buy alcohol"
+priority: 2
+condition: "(deliveryInfo.getHeight() * deliveryInfo.getLength() * deliveryInfo.getWidth())>=2500 && deliveryInfo.getTotalCost() == 0"
+actions:
+  - "deliveryInfo.setTotalCost(deliveryInfo.getHeight() * deliveryInfo.getLength() * deliveryInfo.getWidth());"
+---
+name: "MediumParcel"
+description: "MediumParcel"
+priority: 3
+condition: "(deliveryInfo.getHeight() * deliveryInfo.getLength() * deliveryInfo.getWidth()) < 2500 && deliveryInfo.getTotalCost() == 0"
+actions:
+  - "deliveryInfo.setTotalCost((deliveryInfo.getHeight() * deliveryInfo.getLength() * deliveryInfo.getWidth()) * 0.04);"
+---
+name: "SmallParcel"
+description: "SmallParcel"
+priority: 4
+condition: "(deliveryInfo.getHeight() * deliveryInfo.getLength() * deliveryInfo.getWidth())>=2500 && deliveryInfo.getTotalCost() == 0"
+actions:
+  - "deliveryInfo.setTotalCost((deliveryInfo.getHeight() * deliveryInfo.getLength() * deliveryInfo.getWidth()) * 0.03);"
+---
+name: "Discount"
+description: "Discount"
+priority: 5
+condition: "deliveryInfo.getVoucherCode() != null && deliveryInfo.getExpiry() != null && deliveryInfo.getTotalCost() > 0 && LocalDate.now().isBefore(deliveryInfo.getExpiry().toLocalDate())"
+actions:
+  - "deliveryInfo.setTotalCost(deliveryInfo.getTotalCost() - deliveryInfo.getDiscount());"

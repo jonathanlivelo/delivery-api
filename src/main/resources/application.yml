@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: delivery
+  jpa.open-in-view: false
+springdoc:
+  swagger-ui.path: /swagger-ui-custom.html
+  api-docs.path: /api-docs
+voucher:
+  url : https://mynt-exam.mocklab.io/voucher/
+  apiKey : apiKey
